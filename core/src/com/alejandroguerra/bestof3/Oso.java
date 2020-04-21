@@ -53,6 +53,7 @@ public class Oso {
 
         movement.scl(SPEED);
         position.add(movement);
+        rectangle.=position.x
     }
 
     public void render(SpriteBatch batch) {

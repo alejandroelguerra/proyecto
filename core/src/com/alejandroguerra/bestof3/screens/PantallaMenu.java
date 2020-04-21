@@ -32,7 +32,7 @@ public class PantallaMenu  implements Screen {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                   ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego1());
+                   ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego2());
                     dispose();
 
             }

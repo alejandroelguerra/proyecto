@@ -46,7 +46,7 @@ public class PantallaJuego1 implements Screen {
         batch = new SpriteBatch();
         img=new Texture("fondos/fondo1.png");
         oso = new Oso(10, 2, 3);
-        niña = new Nina(500, 2, 3);
+        niña = new Nina(Constantes.SCREEN_WIDTH, 2, 3);
         objetos=new Array<>();
         muro=new Array<>();
         tiempoMeteorito= TimeUtils.millis();
