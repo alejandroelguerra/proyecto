@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Nina {
@@ -17,6 +18,7 @@ public class Nina {
     Animation leftAnimation;
     TextureRegion currentFrame;
     float stateTime;
+    public Rectangle rect;
 
     int lives;
     // Estados del personaje
@@ -25,11 +27,13 @@ public class Nina {
     }
     public State state;
 
-    public Nina(float x, float y, int lives) {
+    public Nina(/*float x, float y*/Vector2 position, int lives) {
 
-        position = new Vector2(x, y);
+       // position = new Vector2(x, y);
+        this.position = position;
         this.lives = lives;
         state = State.IDLE;
+        rect=new Rectangle(getPosicion().x,getPosicion().y,0,0);
 
         // TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("animaciones.pack"));
         // Carga las animaciones para cada dirección
@@ -54,6 +58,8 @@ public class Nina {
 
         movement.scl(SPEED);
         position.add(movement);
+        rect=new Rectangle(getPosicion().x,getPosicion().y,currentFrame.getRegionWidth(),currentFrame.getRegionWidth());
+        rect.setPosition(position);
     }
 
     public void render(SpriteBatch batch) {
@@ -88,8 +94,34 @@ public class Nina {
         // Comprueba los límites de la pantalla
         if (position.x <= 0)
             position.x = 0;
+        if (position.x  >= Constantes.SCREEN_WIDTH)
+            position.x = Constantes.SCREEN_WIDTH;
+        position.y-=Constantes.GRAVITY;
+        rect.setPosition(position);
+        if(position.y<90)
+            position.y=90;
+    }
+    public Vector2 getPosicion() {
+        return position;
+    }
 
-        if ((position.x + currentFrame.getRegionWidth()) >= Constantes.SCREEN_WIDTH)
-            position.x = Constantes .SCREEN_WIDTH - currentFrame.getRegionWidth();
+    public void setPosicion(Vector2 posicion) {
+        this.position = posicion;
+    }
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+    public void quitarVida(){
+        int vida = this.getLives()-1;
+        setLives(vida);
+
+    }
+    public void jump() {
+        position.y = Constantes.JUMPING_SPEED;
+        rect.setPosition(position);
     }
 }

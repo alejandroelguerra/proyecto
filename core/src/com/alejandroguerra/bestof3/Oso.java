@@ -1,11 +1,11 @@
 package com.alejandroguerra.bestof3;
 
-import com.alejandroguerra.bestof3.Constantes;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 
 public class Oso {
 
@@ -18,6 +18,7 @@ public class Oso {
     float stateTime;
     public Rectangle rect;
     int lives;
+    Body body;
 
     // Estados del personaje
     public enum State {
@@ -25,11 +26,15 @@ public class Oso {
     }
     public State state;
 
-    public Oso(float x, float y, int lives) {
+    public Oso(/*float x, float y*/Vector2 position, int lives) {
 
-        position = new Vector2(x, y);
+        //position = new Vector2(x, y);
+        this.position = position;
+       /* position=new Vector2(position.x,position.y);*/
         this.lives = lives;
         state = State.IDLE;
+        rect=new Rectangle(getPosicion().x,getPosicion().y,0,0);
+        //rect=new Rectangle(getPosicion().x,getPosicion().y,currentFrame.getRegionWidth(),currentFrame.getRegionWidth());
 
 
         rightAnimation = new Animation(0.25f,new TextureRegion[]{
@@ -48,12 +53,20 @@ public class Oso {
                 new Sprite( new Texture(Gdx.files.internal("oso/i5.png")))});
     }
 
+
     // Desplaza la tabla en el eje x
     public void move(Vector2 movement) {
 
         movement.scl(SPEED);
         position.add(movement);
-        rectangle.=position.x
+        rect=new Rectangle(getPosicion().x,getPosicion().y,currentFrame.getRegionWidth(),currentFrame.getRegionWidth());
+        rect.setPosition(position);
+        //rect.setPosition(position.x,position.y);
+       // rectangle.=position.x
+    }
+    public void salto(){
+     //   body.applyLinearImpulse(0, 4f,position.x,position.y,true);
+
     }
 
     public void render(SpriteBatch batch) {
@@ -89,7 +102,37 @@ public class Oso {
         if (position.x <= 0)
             position.x = 0;
 
-        if ((position.x + currentFrame.getRegionWidth()) >= Constantes.SCREEN_WIDTH)
-            position.x = Constantes .SCREEN_WIDTH - currentFrame.getRegionWidth();
+        /*if ((position.x + currentFrame.getRegionWidth()) >= Constantes.SCREEN_WIDTH)
+            position.x = Constantes.SCREEN_WIDTH - currentFrame.getRegionWidth();*/
+        if (position.x  >= Constantes.SCREEN_WIDTH)
+            position.x = Constantes.SCREEN_WIDTH;
+        position.y-=Constantes.GRAVITY;
+        rect.setPosition(position);
+        if(position.y<90)
+            position.y=90;
+    }
+    public Vector2 getPosicion() {
+        return position;
+    }
+
+    public void setPosicion(Vector2 posicion) {
+        this.position = posicion;
+    }
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+    public void quitarVida(){
+        int vida = this.getLives()-1;
+        setLives(vida);
+
+    }
+
+    public void jump() {
+        position.y = Constantes.JUMPING_SPEED;
+        rect.setPosition(position);
     }
 }

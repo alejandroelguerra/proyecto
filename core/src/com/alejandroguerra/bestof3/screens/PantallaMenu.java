@@ -1,14 +1,22 @@
 package com.alejandroguerra.bestof3.screens;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.Screen;
+import com.alejandroguerra.bestof3.Constantes;
+import com.alejandroguerra.bestof3.Oso;
+import com.alejandroguerra.bestof3.Util;
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.VisImageButton;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
@@ -16,70 +24,46 @@ import com.kotcrab.vis.ui.widget.VisTextButton;
 public class PantallaMenu  implements Screen {
 
     Stage stage;
-
+    Texture img;
+    SpriteBatch batch;
+    Music aSound;
     @Override
     public void show() {
         if (!VisUI.isLoaded())
             VisUI.load();
 
         stage = new Stage();
+        batch= new SpriteBatch();
+        img=new Texture("fondos/fondo2(1).png");
+        aSound = Gdx.audio.newMusic(Gdx.files.internal("sonido/menu.mp3"));
+        aSound.play();
+        aSound.setLooping(true);
+        aSound.setVolume((float) 0.1);
+        Util.score1=0;
+        Util.score2=0;
 
-        VisTable table = new VisTable(true);
-        table.setFillParent(true);
-        stage.addActor(table);
-
-        VisTextButton playButton = new VisTextButton("PLAY");
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                   ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego2());
-                    dispose();
-
-            }
-        });
-
-        VisTextButton configButton = new VisTextButton("CONFIGURATION");
-        configButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //((Game)Gdx.app.getApplicationListener()).setScreen(new PantallaConfig());
-                dispose();
-            }
-        });
-
-        VisTextButton quitButton = new VisTextButton("QUIT");
-        quitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                VisUI.dispose();
-                // Salir del juego
-                System.exit(0);
-            }
-        });
-
-        VisLabel aboutLabel = new VisLabel("PRACTICA 2\nALEJANDRO GUERRA");
-
-        // Añade filas a la tabla y añade los componentes
-        table.row();
-        table.add(playButton).center().width(200).height(100).pad(5);
-        table.row();
-        table.add(configButton).center().width(200).height(50).pad(5);
-        table.row();
-        table.add(quitButton).center().width(200).height(50).pad(5);
-        table.row();
-        table.add(aboutLabel).left().width(200).height(20).pad(5);
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float dt) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.getBatch().begin();
 
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Pinta la UI en la pantalla
+        stage.getBatch().draw(img, 0, 0, stage.getWidth(),stage.getHeight());
+        stage.getBatch().end();
         stage.act(dt);
         stage.draw();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego1());
+            aSound.stop();
+            dispose();
+        }
+        else if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            System.exit(0);
+        }
+
     }
 
 
@@ -105,6 +89,5 @@ public class PantallaMenu  implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }
