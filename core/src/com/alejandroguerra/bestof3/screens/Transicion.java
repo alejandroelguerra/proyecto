@@ -70,10 +70,7 @@ public class Transicion implements Screen {
             if(Util.score1==1 && Util.score2==0||Util.score1==0 && Util.score2==1){
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego1());
             }
-            /*else {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego1());
-                dispose();
-            }*/
+
         }
         else if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             System.exit(0);

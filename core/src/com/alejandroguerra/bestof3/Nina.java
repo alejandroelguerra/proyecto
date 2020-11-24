@@ -27,15 +27,13 @@ public class Nina {
     }
     public State state;
 
-    public Nina(/*float x, float y*/Vector2 position, int lives) {
+    public Nina(Vector2 position, int lives) {
 
-       // position = new Vector2(x, y);
         this.position = position;
         this.lives = lives;
         state = State.IDLE;
         rect=new Rectangle(getPosicion().x,getPosicion().y,0,0);
 
-        // TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("animaciones.pack"));
         // Carga las animaciones para cada dirección
         rightAnimation = new Animation(0.25f,new TextureRegion[]{
                 new Sprite( new Texture(Gdx.files.internal("nina/d1.png"))),

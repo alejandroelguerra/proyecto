@@ -165,7 +165,7 @@ public class PantallaJuego1 implements Screen {
         if(contaVidas2<=0){
             Util.score1=Util.score1+1;
             aSound.stop();
-           // ((Game) Gdx.app.getApplicationListener()).setScreen(new Transicion());
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new Transicion());
 
         }
     }

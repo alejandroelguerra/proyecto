@@ -1,25 +1,13 @@
 package com.alejandroguerra.bestof3.screens;
 
-import com.alejandroguerra.bestof3.Constantes;
-import com.alejandroguerra.bestof3.Oso;
 import com.alejandroguerra.bestof3.Util;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.widget.VisImageButton;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.VisTextButton;
 
 public class PantallaMenu  implements Screen {
 
@@ -56,7 +44,7 @@ public class PantallaMenu  implements Screen {
         stage.draw();
 
         if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego1());
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new PantallaJuego2());
             aSound.stop();
             dispose();
         }

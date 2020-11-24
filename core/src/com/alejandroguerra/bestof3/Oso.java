@@ -26,15 +26,12 @@ public class Oso {
     }
     public State state;
 
-    public Oso(/*float x, float y*/Vector2 position, int lives) {
+    public Oso(Vector2 position, int lives) {
 
-        //position = new Vector2(x, y);
         this.position = position;
-       /* position=new Vector2(position.x,position.y);*/
         this.lives = lives;
         state = State.IDLE;
         rect=new Rectangle(getPosicion().x,getPosicion().y,0,0);
-        //rect=new Rectangle(getPosicion().x,getPosicion().y,currentFrame.getRegionWidth(),currentFrame.getRegionWidth());
 
 
         rightAnimation = new Animation(0.25f,new TextureRegion[]{
@@ -61,13 +58,8 @@ public class Oso {
         position.add(movement);
         rect=new Rectangle(getPosicion().x,getPosicion().y,currentFrame.getRegionWidth(),currentFrame.getRegionWidth());
         rect.setPosition(position);
-        //rect.setPosition(position.x,position.y);
-       // rectangle.=position.x
     }
-    public void salto(){
-     //   body.applyLinearImpulse(0, 4f,position.x,position.y,true);
 
-    }
 
     public void render(SpriteBatch batch) {
 
@@ -102,8 +94,6 @@ public class Oso {
         if (position.x <= 0)
             position.x = 0;
 
-        /*if ((position.x + currentFrame.getRegionWidth()) >= Constantes.SCREEN_WIDTH)
-            position.x = Constantes.SCREEN_WIDTH - currentFrame.getRegionWidth();*/
         if (position.x  >= Constantes.SCREEN_WIDTH)
             position.x = Constantes.SCREEN_WIDTH;
         position.y-=Constantes.GRAVITY;

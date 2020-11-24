@@ -186,7 +186,7 @@ public class PantallaJuego2 implements Screen {
             if(TimeUtils.millis()- tiempoDisparo1> Constantes.TIEMPO_ENTRE_DISPAROS){
                 int x = (int) (jugador.getPosicion().x + jugador.getTextura().getWidth());
                 int y = (int) jugador.getPosicion().y;
-                Bala bala = new Bala(new Vector2(x, y+50), new Texture("espada1.png"), 1, 5);
+                Bala bala = new Bala(new Vector2(x, y+50), new Texture("espada4.png"), 1, 5);
                 balas1.add(bala);
                 Sound aSound = Gdx.audio.newSound(Gdx.files.internal("sonido/lanzar.mp3"));
                 aSound.play();
