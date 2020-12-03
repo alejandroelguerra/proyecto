@@ -54,7 +54,7 @@ public class PantallaJuego3 implements Screen {
         tiempoMeteorito= TimeUtils.millis();
         tiempoMuro = TimeUtils.millis();
         pausa = new BitmapFont();
-        pausa.setColor(Color.WHITE);
+        pausa.setColor(Color.BLACK);
         pausa.getData().setScale(3);
         salto1=true;
         salto2=true;
@@ -158,7 +158,7 @@ public class PantallaJuego3 implements Screen {
 
 
     public void Cactus(){
-        if(TimeUtils.millis() -tiempoMeteorito> MathUtils.random(3000,3000)){
+        if(TimeUtils.millis() -tiempoMeteorito> MathUtils.random(3000,3500)){
             Texture textura = new Texture("captus.png");
 
             int x=Gdx.graphics.getWidth() ;
@@ -231,7 +231,6 @@ public class PantallaJuego3 implements Screen {
 
     @Override
     public void dispose() {
-        //  spriteBatch.dispose();
         fuente.dispose();
     }
 }

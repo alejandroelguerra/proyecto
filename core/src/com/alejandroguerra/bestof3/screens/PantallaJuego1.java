@@ -212,7 +212,6 @@ public class PantallaJuego1 implements Screen {
 
     @Override
     public void dispose() {
-      //  spriteBatch.dispose();
         fuente.dispose();
     }
 }

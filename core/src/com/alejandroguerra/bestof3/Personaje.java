@@ -14,8 +14,6 @@ public class Personaje {
     public Rectangle rect;
     private  int posiTextura;
 
-    Animation right;
-    Animation left;
 
 
     public Personaje(Vector2 posicion, Texture textura, int vidas, int velocidad) {
